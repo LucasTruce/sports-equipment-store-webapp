@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row" style="margin: 25px auto auto;">
+
+    <div *ngFor="let tempProduct of products" class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12" >
+
+        <div class="card" *ngIf="tempProduct.active || (!tempProduct.active && tokenStorage.isAdmin())" style="width: 100%; height: auto; background-color: #343A40; border: 1px solid gray; margin: auto auto 25px;">
+          <a routerLink="/products/{{tempProduct.id}}"> <img class="card-img-top mr-2" style="height: 180px; width: 100%" src="{{tempProduct.imageUrl}}"></a>
+          <div class="card-body">
+            <a routerLink="/products/{{tempProduct.id}}" style="text-decoration: none; color: white;"><h4>{{ tempProduct.name }}</h4></a>
+            <p class="card-text text-justify" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+              {{tempProduct.description}}</p>
+            <div class="price" style="color: red">{{ tempProduct.unitPrice}}zł</div>
+            <button class="btn btn-primary" style="font-size: 12px" (click)="addToCart(tempProduct)">Dodaj do koszyka</button>
+          </div>
+        </div>
+
+
+
+
+    </div>
+  </div>
+</div>

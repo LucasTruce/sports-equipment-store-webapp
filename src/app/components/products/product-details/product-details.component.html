@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row" style="margin-left: 25px; padding: 30px;">
+    <div  class="col-md-8 text-center">
+        <img src="{{ product.imageUrl }}" style="height: 200px; width: 300px; text-align: left; margin-bottom: 15px">
+    </div>
+    <div  class="col-md-4">
+        <h3 style="font-weight: bold">{{ product.name }}</h3>
+        <div class="price" style="color: red">{{ product.unitPrice}}zł</div>
+        <button class="btn btn-primary" style="font-size: 12px" (click)="addToCart(product)">Dodaj do koszyka</button>
+    </div>
+
+    <h4 class="col-md-12" style="font-weight: bold">Opis produktu</h4>
+    <p class="col-md-12">{{ product.description }}</p>
+    <a routerLink="/products" class="mt-5">Powrót do listy produktów</a>
+
+    <a *ngIf="tokenStorage.isAdmin()" routerLink="/admin/edit-product/{{product.id}}" class="mt-5" style="margin-left: 250px; display: inline-block;">Edytuj produkt</a>
+
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div id="login-form">
+  <form class="form-login" #addUserForm="ngForm">
+    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Zarejestruj się</h1>
+
+    <div *ngIf="this.error != null" class="text-center" style="color: red;">{{this.error}}</div>
+    <div *ngIf="this.error == null"><br/></div>
+
+    <div class="input-group">
+      <input type="text" class="form-control"  [(ngModel)]="user.username" name="username" #username="ngModel" required minlength="3" autofocus="" placeholder="Nazwa użytkownika">
+    </div>
+    <div *ngIf="username.invalid"
+         class="alert alert-danger">
+      <div *ngIf="username.errors.required">
+        Nazwa użytkownika jest wymagana!
+      </div>
+      <div *ngIf="username.errors.minlength">
+        Nazwa użytkownika musi mieć minimum 3 znaki!
+      </div>
+    </div>
+
+
+
+    <div class="input-group">
+      <input type="text" class="form-control"  [(ngModel)]="user.email" name="email" #email="ngModel" email="true" required autofocus="" placeholder="Email">
+    </div>
+    <div *ngIf="email.invalid"
+         class="alert alert-danger">
+      <div *ngIf="email.errors.required">
+        Email jest wymagany!
+      </div>
+      <div *ngIf="email.errors.email">
+        Podaj poprawny format np.: ex@example.com!
+      </div>
+    </div>
+
+    <div class="input-group">
+      <input type="password" class="form-control" [(ngModel)]="user.password" name="password" #password="ngModel" required minlength="3" placeholder="Hasło">
+    </div>
+    <div *ngIf="password.invalid"
+         class="alert alert-danger">
+      <div *ngIf="password.errors.required">
+        Hasło jest wymagane!
+      </div>
+      <div *ngIf="password.errors.minlength">
+        Hasło musi mieć minimum 3 znaki!
+      </div>
+    </div>
+
+
+    <div class="input-group">
+      <button class="btn btn-md btn-rounded btn-block submit" (click)="handleRegister()" [disabled]="addUserForm.form.invalid">Zarejestruj się</button>
+    </div>
+    <hr>
+
+    <button class="btn btn-primary btn-block" id="btn-signup" routerLink="/login" >Masz konto? Zaloguj się</button>
+  </form>
+</div>

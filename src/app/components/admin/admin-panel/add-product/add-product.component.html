@@ -1,0 +1,109 @@
+<div class="container-fluid">
+  <div class="row" style="padding: 20px;">
+    <div  class="col-md-12">
+      <h4>Dodawanie produktu</h4>
+
+      <form #addProductForm="ngForm">
+
+        <div class="row">
+          <div class="col-8">
+            <div class="form-group">
+            <label for="product_id">Nazwa produktu</label>
+            <input type="text" id="product_id" placeholder="Nazwa produktu" class="form-control" name="product.name" [(ngModel)]="product.name" #name="ngModel" required minlength="3" style="margin:0px;" >
+              <div *ngIf="name.invalid"
+                   class="alert alert-danger">
+                <div *ngIf="name.errors.required">
+                  Nazwa jest wymagana
+                </div>
+                <div *ngIf="name.errors.minlength">
+                  Nazwa musi mieć minimum 3 znaki!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="form-group">
+              <label for="product_name">Cena produktu [zł]</label>
+              <input type="number" id="product_name" placeholder="Cena" class="form-control" name="product.unitPrice" min="1" #unitPrice="ngModel" [(ngModel)]="product.unitPrice" style="margin:0px;">
+              <div *ngIf="product.unitPrice == 0" class="alert alert-danger">
+                Cena musi być różna od 0!
+              </div>
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="form-group">
+              <label for="units_in_stock">Ilość sztuk w magazynie [szt.]</label>
+              <input type="number" id="units_in_stock" placeholder="Ilość sztuk" class="form-control" name="product.unitsInStock" [(ngModel)]="product.unitsInStock" style="margin:0px;">
+              <div *ngIf="product.unitsInStock == 0" class="alert alert-danger">
+                Liczba sztuk w magazynie musi być różna od 0!
+              </div>
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="form-group">
+              <label for="selectCategory">Wybierz kategorię:</label>
+              <mat-select placeholder="Wybierz kategorię" [(ngModel)]="product.category" name="product.category" id="selectCategory" class="col-md-12" style="text-align: center; font-size: 15px;">
+                <mat-option *ngFor="let category of productCategories" [value]="category" style="text-align: center">{{category.name}}</mat-option>
+              </mat-select>
+              <div *ngIf="product.category == null" class="alert alert-danger">
+                Musisz wybrać kategorię!
+              </div>
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="form-group" style="margin-bottom: 10px">
+              Czy produkt jest aktywny?
+            </div>
+            <div class="form-check form-check-inline col-md-5" style="margin-top: 5px;">
+              <input class="form-check-input" type="radio" name="productIsActive" id="productIsActive" value="Tak" [value]="true" [(ngModel)]="product.active">
+              <label class="form-check-label" for="productIsActive">Tak</label>
+            </div>
+            <div class="form-check form-check-inline col-md-5">
+              <input class="form-check-input" type="radio" name="productIsActive" id="productIsNotActive" value="Nie" [value]="false" [(ngModel)]="product.active">
+              <label class="form-check-label" for="productIsNotActive">Nie</label>
+            </div>
+          </div>
+
+          <div class="col-8" style="margin-top: 10px">
+            <div class="form-group">
+              <label for="productDescription">Opis produktu</label>
+              <textarea class="form-control" id="productDescription" rows="1" name="product.description" #description="ngModel" required minlength="5" [(ngModel)]="product.description"></textarea>
+              <div *ngIf="description.invalid" class="alert alert-danger">
+                <div *ngIf="description.errors.required">
+                  Opis jest wymagany!
+                </div>
+                <div *ngIf="description.errors.minlength">
+                  Opis musi mieć minimum 5 znaki!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-8">
+            <div class="form-group">
+              <label for="imageFile" style="width: 100%">Dodaj zdjęcie produktu</label>
+              <input type="file" id="imageFile" (change)="onFileChanged($event)">
+              <div *ngIf="selectedFile == null" class="alert alert-danger">
+                  Plik jest wymagany!
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="addProduct()" [disabled]="addProductForm.form.invalid || selectedFile == null || product.unitsInStock == 0 || product.unitPrice == 0 || product.category == null">Dodaj produkt</button>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+

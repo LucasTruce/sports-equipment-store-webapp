@@ -1,0 +1,27 @@
+<div id="login-form">
+  <form class="form-login">
+    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Zaloguj się</h1>
+
+    <div *ngIf="this.error != null" class="text-center" style="color: red;">{{this.error}}</div>
+    <div *ngIf="this.error == null"><br/></div>
+    <div class="input-group">
+      <input type="text" class="form-control"  [(ngModel)]="user.username" name="username" autofocus="" placeholder="Nazwa użytkownika">
+    </div>
+
+    <!--<div class="input-group" style="width: 275px; margin: auto;"> -->
+    <div class="input-group" >
+      <input type="password" class="form-control" [(ngModel)]="user.password" name="password" placeholder="Hasło">
+    </div>
+
+    <div class="input-group">
+      <button class="btn btn-md btn-rounded btn-block submit" (click)="handleLogin()">Zaloguj się</button>
+    </div>
+
+    <a href="#" id="forgot-pass">Zapomniałeś hasła?</a>
+    <hr>
+
+    <button class="btn btn-primary btn-block" id="btn-signup" routerLink="/register">Zarejestruj nowe konto</button>
+  </form>
+</div>
+
+
